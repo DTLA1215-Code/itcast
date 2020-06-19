@@ -2,6 +2,6 @@ package com.itcast.pojo;
 
 public class test {
   {
-    hello~;
+      System.out.println("hello~");
   }
 }
