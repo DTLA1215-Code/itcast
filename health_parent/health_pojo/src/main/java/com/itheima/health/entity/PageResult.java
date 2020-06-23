@@ -8,19 +8,19 @@ import java.util.List;
  * User: Eric
  */
 public class PageResult<T> implements Serializable {
-    private Integer total;
+    private long total;
     private List<T> rows;
 
-    public PageResult(Integer total, List<T> rows) {
+    public PageResult(long total, List<T> rows) {
         this.total = total;
         this.rows = rows;
     }
 
-    public Integer getTotal() {
+    public long getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(long total) {
         this.total = total;
     }
 
