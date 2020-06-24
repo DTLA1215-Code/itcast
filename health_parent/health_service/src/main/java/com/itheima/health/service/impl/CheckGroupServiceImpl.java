@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-@Service
+@Service(interfaceClass = CheckGroupService.class)
 public class CheckGroupServiceImpl implements CheckGroupService {
 
     @Autowired
