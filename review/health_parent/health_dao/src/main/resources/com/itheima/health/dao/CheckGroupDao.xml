@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.health.dao.CheckGroupDao">
+    <insert id="add" parameterType="com.itheima.health.pojo.CheckGroup">
+        <selectKey resultType="int" order="AFTER" keyProperty="id">
+            select last_insert_id()
+        </selectKey>
+        insert into t_checkgroup (code,name,helpCode,sex,remark,attention)
+        values (#{code},#{name},#{helpCode},#{sex},#{remark},#{attention})
+    </insert>
+    <insert id="addCheckGroupCheckItem">
+        insert into t_checkgroup_checkitem (checkgroup_id, checkitem_id)
+        values (#{checkGroupId}, #{checkitemId})
+    </insert>
+    <update id="update" parameterType="com.itheima.health.pojo.CheckGroup">
+        update t_checkgroup
+         set
+            code=#{code},
+            name=#{name},
+            helpCode=#{helpCode},
+            sex=#{sex},
+            remark=#{remark},
+            attention=#{attention}
+        where id=#{id}
+    </update>
+    <delete id="deleteCheckGroupCheckItem" parameterType="java.lang.Integer">
+        delete from t_checkgroup_checkitem where checkgroup_id=#{id}
+    </delete>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from t_checkgroup where id=#{id}
+    </delete>
+    <select id="findByCondition" resultType="com.itheima.health.pojo.CheckGroup" parameterType="java.lang.String">
+        select * From t_checkgroup
+        <if test="value !=null and value.length > 0">
+            where code like #{value} or name like #{value} or helpCode like #{value}
+        </if>
+    </select>
+    <select id="findById" resultType="com.itheima.health.pojo.CheckGroup" parameterType="java.lang.Integer">
+        select * from t_checkgroup where id = #{id}
+    </select>
+    <select id="findCheckItemIdsByCheckGroupId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select checkitem_id from t_checkgroup_checkitem where checkgroup_id = #{id}
+    </select>
+    <select id="findSetmealCountByCheckGroupId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select count(1) from t_setmeal_checkgroup where checkgroup_id=#{id}
+    </select>
+    <select id="findAll" resultType="com.itheima.health.pojo.CheckGroup">
+        select * from t_checkgroup;
+    </select>
+</mapper>
