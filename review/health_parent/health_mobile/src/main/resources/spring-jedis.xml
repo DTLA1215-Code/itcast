@@ -22,6 +22,6 @@
         <constructor-arg name="poolConfig" ref="jedisPoolConfig" />
         <constructor-arg name="host" value="${redis.host}" />
         <constructor-arg name="port" value="${redis.port}" type="int" />
-        <constructor-arg name="timeout" value="${redis.timeout}" type="int" />
+        <constructor-arg name="timeout" value="30000" type="int" />
     </bean>
 </beans>

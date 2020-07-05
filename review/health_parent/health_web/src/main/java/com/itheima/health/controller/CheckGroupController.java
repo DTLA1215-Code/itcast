@@ -54,7 +54,7 @@ public class CheckGroupController {
     //确认键点击后更新
     @PostMapping("edit")
     public Result edit(@RequestBody CheckGroup checkGroup,Integer[]checkitemIds){
-        checkGroupService.edit(checkGroup,checkitemIds);
+        checkGroupService.update(checkGroup,checkitemIds);
         return new Result(true,MessageConstant.EDIT_CHECKGROUP_SUCCESS);
     }
 

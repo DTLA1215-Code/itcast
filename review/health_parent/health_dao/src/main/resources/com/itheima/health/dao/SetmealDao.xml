@@ -88,4 +88,10 @@
             </collection>
         </collection>
     </resultMap>
+    <select id="findSetmealCount" resultType="java.util.Map">
+        SELECT s.name,COUNT(o.id) AS value
+            FROM t_order o ,t_setmeal s
+            WHERE o.setmeal_id = s.id
+            GROUP BY s.name
+    </select>
 </mapper>

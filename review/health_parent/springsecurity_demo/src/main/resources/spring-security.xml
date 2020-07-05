@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <security:http pattern="/html/**" security="none"/>
+    <security:http pattern="/test.html" security="none"/>
+
+    <security:http auto-config="true" use-expressions="false">
+    <security:intercept-url pattern="/**" access="ROLE_ADMIN"/>
+    <!--<security:http auto-config="true" use-expressions="true">-->
+        <!--<security:intercept-url pattern="/a.html" access="isAuthenticated()"/>-->
+        <!--<security:intercept-url pattern="/b.html" access="hasAuthority('ADD_CHECKITEM')"/>-->
+        <!--<security:intercept-url pattern="/c.html" access="hasRole('ADMIN')"/>-->
+
+        <security:form-login
+                login-page="/login.html"
+                username-parameter="abc"
+                password-parameter="bbb"
+                login-processing-url="/login"
+
+
+                authentication-failure-url="/fail.html"
+        ></security:form-login>
+        <security:csrf disabled="true"/>
+
+        <security:logout logout-url="/logout" logout-success-url="/logout.html" invalidate-session="true"/>
+    </security:http>
+
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="userService">
+<!--            <security:user-service>
+                <security:user name="admin" authorities="ROLE_ADMIN" password="{noop}admin"/>
+            </security:user-service>-->
+            <security:password-encoder ref="encoder"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <bean class="com.itheima.health.security.UserService" id="userService"/>
+    <bean class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" id="encoder"/>
+
+    <security:global-method-security pre-post-annotations="enabled"/>
+    <context:component-scan base-package="com.itheima.health"/>
+    <mvc:annotation-driven></mvc:annotation-driven>
+</beans>

@@ -61,7 +61,7 @@ public class CheckGroupServiceImpl implements CheckGroupService {
 
     @Override
     @Transactional
-    public void edit(CheckGroup checkGroup, Integer[] checkitemIds) {
+    public void update(CheckGroup checkGroup, Integer[] checkitemIds) {
         //先更新组
         checkGroupDao.update(checkGroup);
 

@@ -5,6 +5,7 @@ import com.itheima.health.pojo.Setmeal;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SetmealDao {
     void add(Setmeal setmeal);
@@ -28,4 +29,7 @@ public interface SetmealDao {
     List<Setmeal> findAll();
 
     Setmeal findDetailById(int id);
+
+    List<Map<String, Object>> findSetmealCount();
+
 }

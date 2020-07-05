@@ -15,4 +15,6 @@ public interface OrderSettingDao {
     void add(OrderSetting orderSetting);
 
     List<Map<String, Integer>> getOrderSettingBetweenDate(@Param("startDate") String startDate,@Param("endDate") String endDate);
+
+    void editReservationsByOrderDate(OrderSetting orderSetting);
 }
