@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -47,6 +48,44 @@ public class ReportController {
         return new Result(true, MessageConstant.GET_MEMBER_NUMBER_REPORT_SUCCESS,map);
     }
 
+    @RequestMapping("getMemberReportBetweenDays")
+    public Result getMemberReportBetweenDays(String start,String end){
+        List<String>months = new ArrayList<>();
+
+        //2020-01-01 ---->  2020-04-01
+        String[] splitStart = start.split("-");
+        String[] splitEnd = end.split("-");
+        int diffDate = Integer.valueOf(splitEnd[1]) - Integer.valueOf(splitStart[1]);
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(start);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        calendar.setTime(date);
+
+        String newStart = start.substring(0, 7);
+        months.add(newStart);
+        for (int i = 0; i < diffDate; i++) {
+            calendar.add(Calendar.MONTH,+1);
+            Date dateMonth = calendar.getTime();
+            String everyMonth = simpleDateFormat.format(dateMonth);
+            months.add(everyMonth);
+        }
+        String newEnd = end.substring(0, 7);
+        months.add(newEnd);
+
+        Map<String,Object>map = new HashMap<>();
+        List<Integer>memberCount = memberService.findMembersByMonths(months);
+        map.put("months",months);
+        map.put("memberCount",memberCount);
+        return new Result(true, MessageConstant.GET_MEMBER_NUMBER_REPORT_SUCCESS,map);
+    }
+
+
     @RequestMapping("getSetmealReport")
     public Result getSetmealReport(){
         List<Map<String,Object>>setmealCount = setmealService.findSetmealCount();
@@ -69,10 +108,29 @@ public class ReportController {
 
     @Test
     public void test(){
+        String date1 = "2012-06-01";
+        String date2 = "2012-12-01";
+
+        System.out.println(date1.substring(0,7));
+        /*        String[] splitStart = date1.split("-");
+        String[] splitEnd = date2.split("-");
+        int diffDate = Integer.valueOf(splitEnd[1]) - Integer.valueOf(splitStart[1]);
+//        System.out.println(diffDate);
         Calendar calendar = Calendar.getInstance();
 
-        calendar.add(Calendar.MONTH,-12);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
 
-        System.out.println(calendar.getTime());
+        Date date = null;
+
+        try {
+            date = simpleDateFormat.parse(date1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        calendar.setTime(date);
+        Date dateMonth = calendar.getTime();
+        String everyMonth = simpleDateFormat.format(dateMonth);
+        System.out.println(everyMonth);*/
     }
 }

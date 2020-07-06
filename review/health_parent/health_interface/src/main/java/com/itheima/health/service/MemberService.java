@@ -10,4 +10,5 @@ public interface MemberService {
     Member findByTelephone(String telephone);
 
     List<Integer> findMembersByMonths(List<String> months);
+
 }

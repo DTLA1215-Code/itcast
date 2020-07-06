@@ -223,20 +223,6 @@
                     name: [{ required: true, message: '项目名称为必填项', trigger: 'blur' }]
                 }
             },
-/*            //为什么会报错
-            created() {
-                axios.get('/checkitem/findAll.do').then(res  => {
-                    var result = res.data();
-                    if (result.flag) {
-                        this.dataList = result.data;
-                    }else {
-                        this.$message({
-                            message:result.message,
-                            type:"error"
-                        })
-                    }
-                })
-            },*/
             //钩子函数，VUE对象初始化完成后自动执行
             created() {
                 // 发送请求到后台获取检查项列表数据，

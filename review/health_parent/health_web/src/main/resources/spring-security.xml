@@ -11,6 +11,8 @@
     <security:http pattern="/login.html" security="none"/>
     <security:http pattern="/fail.html" security="none"/>
     <security:http pattern="/test.html" security="none"/>
+    <security:http pattern="/elementTest.html" security="none"/>
+    <security:http pattern="/pages/test.html" security="none"/>
 
     <security:http auto-config="true" use-expressions="true">
         <security:intercept-url pattern="/**" access="isAuthenticated()"/>
