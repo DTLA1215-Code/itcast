@@ -13,7 +13,6 @@
     <script src="../js/echarts.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <!--<link rel="stylesheet" href="../plugins/elementui/index.css">-->
-    <!--<script src="../plugins/echarts/echarts.min.js"></script>-->
 </head>
 
 
@@ -55,10 +54,6 @@
                 <div id="chart1" style="height:600px;"></div>
                 <hr>
 
-                <!--新增-->
-                <!--                <h3 style="text-align: center">会员分布情况</h3>
-                                <div id="chart2" style="height:600px;"></div>
-                                <div id="chart3" style="height:600px;"></div>-->
             </div>
         </div>
     </div>
@@ -131,8 +126,6 @@
 
     // 基于准备好的dom，初始化echarts实例
     let myChart1 = echarts.init(document.getElementById('chart1'));
-    /*    let myChart2 = echarts.init(document.getElementById('chart2'));
-        let myChart3 = echarts.init(document.getElementById('chart3'));*/
 
     // 使用刚指定的配置项和数据显示图表。
     //myChart.setOption(option);
@@ -162,73 +155,5 @@
     }
 
     axios.get("../report/getMemberReport.do").then(setData);
-    /*    axios.get("../report/getMemberReportByAge.do").then(function (resp) {
-            myChart2.setOption({
-                title: {
-                    text: '年龄占比',
-                    subtext: '',
-                    x: 'center'
-                },
-                tooltip: {//提示框组件
-                    trigger: 'item',//触发类型，在饼形图中为item
-                    formatter: "{a} <br/>{b} : {c} ({d}%)"//提示内容格式
-                },
-                legend: {
-                    orient: 'vertical',
-                    left: 'left',
-                    data: resp.data.data.names
-                },
-                series: [
-                    {
-                        name: '年龄占比',
-                        type: 'pie',
-                        radius: '55%',
-                        center: ['50%', '60%'],
-                        data: resp.data.data.counts,
-                        itemStyle: {
-                            emphasis: {
-                                shadowBlur: 10,
-                                shadowOffsetX: 0,
-                                shadowColor: 'rgba(0, 0, 0, 0.5)'
-                            }
-                        }
-                    }
-                ]
-            });
-        })*/
-    /*    axios.get("../report/getMemberReportBySex.do").then(function (resp) {
-            myChart3.setOption({
-                title: {
-                    text: '性别分布占比',
-                    subtext: '',
-                    x: 'center'
-                },
-                tooltip: {//提示框组件
-                    trigger: 'item',//触发类型，在饼形图中为item
-                    formatter: "{a} <br/>{b} : {c} ({d}%)"//提示内容格式
-                },
-                legend: {
-                    orient: 'vertical',
-                    left: 'left',
-                    data: resp.data.data.names
-                },
-                series: [
-                    {
-                        name: '年龄分布占比',
-                        type: 'pie',
-                        radius: '55%',
-                        center: ['50%', '60%'],
-                        data: resp.data.data.counts,
-                        itemStyle: {
-                            emphasis: {
-                                shadowBlur: 10,
-                                shadowOffsetX: 0,
-                                shadowColor: 'rgba(0, 0, 0, 0.5)'
-                            }
-                        }
-                    }
-                ]
-            });
-        })*/
 </script>
 </html>
